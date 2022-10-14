@@ -1,0 +1,75 @@
+{
+    "location": "uksouth",
+    "properties": {
+        "orchestrationMode": "Flexible",
+        "platformFaultDomainCount": 1,
+        "singlePlacementGroup": false,
+        "virtualMachineProfile": {
+            "osProfile": {
+                "computerNamePrefix": "example2-VMSS",
+                "adminUsername": "adminuser",
+                "adminPassword": "@dminP@ss123",
+                "customData": "",
+                "linuxConfiguration": {
+                    "disablePasswordAuthentication": false,
+                    "provisionVMAgent": true,
+                    "patchSettings": {
+                        "patchMode": "ImageDefault"
+                    }
+                }
+            },
+            "storageProfile": {
+                "imageReference": {
+                    "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg-name/providers/Microsoft.Compute/galleries/gallery-name/images/image-name/versions/0.1.1234"
+                },
+                "osDisk": {
+                    "caching": "ReadWrite",
+                    "writeAcceleratorEnabled": false,
+                    "createOption": "FromImage",
+                    "osType": "Linux",
+                    "managedDisk": {
+                        "storageAccountType": "StandardSSD_LRS"
+                    }
+                }
+            },
+            "networkProfile": {
+                "networkInterfaceConfigurations": [{
+                    "name": "test-network-interface",
+                    "properties": {
+                        "primary": true,
+                        "enableAcceleratedNetworking": false,
+                        "dnsSettings": {
+                            "dnsServers": []
+                        },
+                        "ipConfigurations": [{
+                            "name": "IPConfiguration",
+                            "properties": {
+                                "subnet": {
+                                    "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg-dev/providers/Microsoft.Network/virtualNetworks/rg-dev-vnet/subnets/default"
+                                },
+                                "primary": true,
+                                "privateIPAddressVersion": "IPv4",
+                                "applicationGatewayBackendAddressPools": [],
+                                "applicationSecurityGroups": [],
+                                "loadBalancerBackendAddressPools": []
+                            }
+                        }],
+                        "enableIPForwarding": false
+                    }
+                }],
+                "networkApiVersion": "2020-11-01"
+            },
+            "extensionProfile": {
+                "extensionsTimeBudget": "PT1H30M"
+            },
+            "priority": "Regular"
+        }
+    },
+    "sku": {
+        "name": "Standard_D2s_v4",
+        "tier": "Standard",
+        "capacity": 0
+    },
+    "tags": {},
+    "zones": ["1"]
+}
